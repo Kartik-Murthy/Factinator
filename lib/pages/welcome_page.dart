@@ -9,7 +9,8 @@ class WelcomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.lightBlue.shade900,
+      backgroundColor: Color(0xff153462),
+      // backgroundColor: Colors.lightBlue.shade900,
       body: SafeArea(
         child: Stack(
           children: [
@@ -26,9 +27,7 @@ class WelcomePage extends StatelessWidget {
               maxParticleSize: 12,
               isRandSize: true,
               isRandomColor: false,
-
               awayAnimationCurve: Curves.easeInOutBack,
-
               connectDots: false, //not recommended
             ),
             Center(
@@ -55,11 +54,7 @@ class WelcomePage extends StatelessWidget {
                                   fontSize: 24,
                                   fontWeight: FontWeight.w500))
                         ]),
-                    getStartedButton(
-                        onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => HomePage()))),
+                    getStartedButton(context: context),
                   ],
                 ),
               ),
@@ -70,9 +65,10 @@ class WelcomePage extends StatelessWidget {
     );
   }
 
-  Widget getStartedButton({required Function()? onTap}) {
+  Widget getStartedButton({required BuildContext context}) {
     return GestureDetector(
-      onTap: () => onTap,
+      onTap: () => Navigator.push(
+          context, MaterialPageRoute(builder: (context) => const HomePage())),
       child: Container(
         height: 52,
         width: 160,
