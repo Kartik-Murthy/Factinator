@@ -1,12 +1,97 @@
 # Factinator
 
-Factinator is a Flutter application that provides a fun and informative way to learn interesting facts. It fetches random facts from an API and displays them in a visually appealing and user-friendly interface.
+Factinator is a Flutter application designed to deliver random facts using the OpenAI API. It's a showcase of a clean architecture approach with a focus on separation of concerns and testability. 
 
 ## Features
 
+* *Dynamic Fact Generation:* Utilizes the OpenAI API to fetch engaging and informative facts, ensuring a fresh experience every time.
+* *Smooth Animations:* Integrates animated_text_kit for seamless text transitions, enhancing user engagement.
+* *Attractive UI:* Leverages google_fonts for visually appealing typography and particles_flutter for a captivating background effect. 
+* *Environment-Based Configuration:*  Employs envied for secure management of API keys and sensitive data across different environments.
 * *Random Fact Generator:*  Generates random facts on a variety of topics.
 * *User-Friendly Interface:* Easy to navigate and understand.
 * *Visually Appealing Design:*  Uses animations and interesting color schemes.
+
+## Project Structure
+
+The project adheres to a layered architecture, promoting modularity and maintainability:
+
+
+factinator/
+├── lib/
+│   ├── data/
+│   │   ├── models/
+│   │   │   └── fact.dart
+│   │   ├── repositories/
+│   │   │   └── fact_repository_impl.dart
+│   │   └── datasources/
+│   │       └── fact_remote_datasource.dart
+│   ├── domain/
+│   │   ├── repositories/
+│   │   │   └── fact_repository.dart
+│   │   └── usecases/
+│   │       └── get_random_fact.dart
+│   ├── presentation/
+│   │   ├── widgets/
+│   │   │   └── fact_display.dart 
+│   │   ├── bloc/
+│   │   │   └── fact_bloc.dart
+│   │   └── pages/
+│   │       └── home_page.dart
+│   └── main.dart
+├── .env.example
+├── pubspec.yaml
+├── ...
+
+
+*Key Components:*
+
+* *lib/data:* Contains the data access layer, responsible for interacting with the OpenAI API.
+    * *models:*  Defines data structures like Fact to represent fact objects.
+    * *repositories:* Implements concrete repositories like FactRepositoryImpl for fetching fact data.
+    * *datasources:*  Handles direct communication with the OpenAI API through FactRemoteDatasource.
+
+* *lib/domain:* Encapsulates the business logic of the application.
+    * *repositories:*  Defines abstract repositories like FactRepository, providing a contract for data access.
+    * *usecases:* Implements use cases like GetRandomFact to encapsulate specific business logic operations.
+
+* *lib/presentation:*  Responsible for presenting data to the user.
+    * *widgets:*  Reusable UI components like FactDisplay.
+    * *bloc:*  Implements the BLoC pattern using FactBloc to manage the state of the fact retrieval.
+    * *pages:*  Screen-level components like HomePage that orchestrate the UI and user interactions.
+
+## Environment Configuration
+
+1. Create a file named .env in the root directory.
+2. Define your OpenAI API key as follows:
+
+   
+   OPENAI_API_KEY=YOUR_ACTUAL_API_KEY
+   
+
+3.  Run flutter pub run build_runner build to generate the envied configuration.
+
+*Note:* Never commit your .env file to version control.  Use .env.example as a template.
+
+## Running the App
+
+1. Make sure you have Flutter installed and configured. 
+2. Follow the steps in the "Getting Started" section of the basic README.
+
+## Testing
+
+This project emphasizes testability. You can run tests using:
+
+bash
+flutter test
+
+
+## Future Enhancements
+
+* Fact categorization
+* User-specific fact preferences
+* Offline fact storage
+
 
 ## Architecture
 
@@ -40,26 +125,7 @@ ascii
 *API Client:* Handles communication with the API server to fetch new facts.
 
 *API Server:* Provides a database of facts and endpoints for accessing them.
-
-## Getting Started
-
-1. *Install Flutter:* [https://flutter.dev/docs/get-started/install](https://flutter.dev/docs/get-started/install)
-2. *Clone the repository:*
-   bash
-   git clone https://github.com/your-username/factinator.git
-   
-3. *Navigate to the project directory:*
-   bash
-   cd factinator
-   
-4. *Install dependencies:*
-   bash
-   flutter pub get
-   
-5. *Run the app:*
-   bash
-   flutter run
-   
+  
 
 ## Contributing
 
